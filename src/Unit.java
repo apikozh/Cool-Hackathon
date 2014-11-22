@@ -8,6 +8,8 @@ public class Unit extends DynamicObject {
 
     private Weapon weapon;
 
+    private ClientSocket clientSocket;
+
     public String getName() {
         return name;
     }
@@ -30,5 +32,13 @@ public class Unit extends DynamicObject {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public ClientSocket getClientSocket() {
+        return clientSocket;
+    }
+
+    public void setClientSocket(ClientSocket clientSocket) {
+        this.clientSocket = clientSocket;
     }
 }
