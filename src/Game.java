@@ -32,27 +32,19 @@ class Game {
     }
 
     private static void addRandomUnit(Unit unit) {
-        //random coordinates
-        //int getTeam
-        //
-        //addUnit
         int elementPositionY, elementPositionX;
         Random random = new Random();
         boolean unitAdded = false;
         while (!unitAdded) {
-
-        }
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
-//            if (gameMap.getElement(elementPositionX, elementPositionY) == null) {
-//                Unit unit = new Unit();
-//                unit.setPosition(elementPositionX, elementPositionY);
-//                units.add(unit);
-//            }
-
+            if (map.getElement(elementPositionX, elementPositionY) == null) {
+                Team team = teams.get(unit.getTeam());
+                team.addUnit(unit);
+                unitAdded = true;
+            }
+        }
     }
-
-
 
     private static void addRandomBonuses(int quantity, GameMap gameMap) {
         int elementPositionY, elementPositionX;
@@ -91,14 +83,6 @@ class Game {
 
         addRandomWalls(100, map);
         addRandomBonuses(10, map);
-
-
-        //+instance of map
-        //+instances of wall
-        //+put in different places
-        //+bonuses randomly on map
-        //+add method addUnit(Unit), which adds unit on random place
-
 
     }
 	
