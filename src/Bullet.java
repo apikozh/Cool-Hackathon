@@ -3,13 +3,23 @@
  */
 public class Bullet extends DynamicObject {
 
-    private int speed;
+    private BulletType type;
 
-    public int getSpeed() {
-        return speed;
+    private int leftDelay;
+
+    public BulletType getType() {
+        return type;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public int getLeftDelay() {
+        return leftDelay;
+    }
+
+    public void setType(BulletType type) {
+        this.type = type;
+    }
+
+    public void setLeftDelay(int leftDelay) {
+        this.leftDelay = leftDelay;
     }
 }

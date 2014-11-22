@@ -2,6 +2,8 @@
  * Created by Victor Dichko on 22.11.14.
  */
 public class DynamicObject extends BasicLifeClass {
+    public final int
+
     private int positionX;
 
     private int positionY;
