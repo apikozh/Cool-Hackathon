@@ -2,7 +2,6 @@
 import java.util.*;
 
 class Game {
-<<<<<<< HEAD
     private final static int GAME_MAP_WIDTH = 30;
     private final static int GAME_MAP_HEIGHT = 30;
 	private static ArrayList<Unit> units;
@@ -11,12 +10,6 @@ class Game {
 	private static ArrayList<Bullet> bullets;
 
     private static ArrayList<Team> teams;
-=======
-	ArrayList<Unit> units;
-	ArrayList<Bonus> bonuses;
-	GameMap map;
-	ArrayList<Bullet> bullets;
->>>>>>> origin/master
 
 	public static ArrayList<Unit> getUnits() {
 		return units;
@@ -26,7 +19,6 @@ class Game {
 		return bonuses;
 	}
 
-<<<<<<< HEAD
     public static ArrayList<Team> getTeams() {
         return teams;
     }
@@ -35,7 +27,7 @@ class Game {
 //		return new GameMap(height, width);
 //	}
 
-    public static GameMap getGameMap() {
+    public static GameMap getMap() {
         return map;
     }
 
@@ -90,11 +82,6 @@ class Game {
         }
 
     }
-=======
-	GameMap getMap() {
-		return map;
-	}
->>>>>>> origin/master
 
     public static void main(String args[]) {
         Random random = new Random();
