@@ -8,7 +8,7 @@ public class Unit extends DynamicObject {
 
     private int team;
 	
-    private UnitAction nextAction;
+    private UnitAction nextAction = new UnitAction();
 
 	private ClientSocket clientSocket;
 
@@ -20,7 +20,7 @@ public class Unit extends DynamicObject {
         return weapon;
     }
 
-    public UnitAction getNextAction() {
+    public synchronized UnitAction getNextAction() {
         return nextAction;
     }
 
@@ -36,9 +36,9 @@ public class Unit extends DynamicObject {
         this.weapon = weapon;
     }
 
-    //public void setNextAction(UnitAction nextAction) {
-    //    this.weapon = weapon;
-    //}
+    public synchronized void setNextAction(UnitAction nextAction) {
+        this.weapon = weapon;
+    }
 	
     public void setTeam(int team) {
         this.team = team;

@@ -74,6 +74,26 @@ class Game {
 
     }
 
+	private static void proccessBullets() {
+		Bullet bullet = null;
+		for(int index = bullets.size() - 1; index>=0; index--) {
+			bullet = bullets.get(index);
+			if (bullet.getLeftDelay() > 0) {
+				bullet.setLeftDelay(bullet.getLeftDelay() - 1);
+			}else{
+				bullet.fly();
+				if (bullet.getPositionX() < 0 && bullet.getPositionX() >= map.getWidth() &&
+					bullet.getPositionY() < 0 && bullet.getPositionY() >= map.getHeight())
+				{
+					bullets.remove(index);
+				}
+				if 
+				bullet.getType()
+				if (map.getElement())
+			}
+		}
+	}
+
     public static void main(String args[]) {
         Random random = new Random();
 
@@ -82,6 +102,20 @@ class Game {
 
         addRandomWalls(100);
         addRandomBonuses(10);
+		
+		
+		// Main loop
+		
+		while (true) {
+			// Send map data to clients
+			sendMapInfoToPlayers();
+			// Sleep for X ms
+			Thread.sleep(1000);
+			// Do client ACTIONS
+			doUnitActions();
+			// Calc new bullets position
+			proccessBullets();
+		}
 
     }
 	
