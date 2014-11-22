@@ -21,4 +21,9 @@ public class DynamicObject extends BasicLifeClass {
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
+
+    public void setPosition(int positionX, int positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+    }
 }
