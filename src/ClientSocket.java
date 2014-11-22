@@ -1,5 +1,6 @@
 import java.net.*; 
 import java.io.*; 
+import java.util.*;
 
 public class ClientSocket extends Thread { 
 	protected Socket clientSocket;
@@ -21,12 +22,22 @@ public class ClientSocket extends Thread {
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), false);
 			out.println("Welcome to Cool Hackathon!");
 			out.println("map 30 30");
+			out.flush();
 			
 			BufferedReader in = new BufferedReader(
 				 new InputStreamReader(clientSocket.getInputStream())); 
 
-			//String inputLine; 
-
+			String inputLine = in.readLine();
+			
+			if (!inputLine.equals("I wanna play!")) {
+				return;
+			}
+			
+			/*while (true) {
+				String inputLine = in.readLine();
+				System.out.println(inputLine);
+			}*/
+				
 			while (true) {
 				String line = in.readLine();
 				Scanner cmdScanner = new Scanner(line);
@@ -39,7 +50,11 @@ public class ClientSocket extends Thread {
 				//game.addUnit(unit);
 				
 
-			}
+			}*/
+		} catch (IOException e) { 
+			System.err.println("Problem with Communication Server");
+			System.exit(1); 
+		} 
 	}
 
 }

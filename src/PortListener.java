@@ -4,9 +4,11 @@ import java.io.*;
 public class PortListener extends Thread { 
 	protected int port;
 	private boolean terminated;
+	private Game game;
 	
-	public PortListener(int port) {
+	public PortListener(int port, Game game) {
 		this.port = port;
+		this.game = game;
 		start();
 	}
 	
@@ -21,7 +23,7 @@ public class PortListener extends Thread {
 					//serverSocket.setSoTimeout(10000);
 					System.out.println("Waiting for Connection");
 					try {
-                       new ClientSocket(serverSocket.accept()); 
+                       new ClientSocket(serverSocket.accept(), game); 
 					} catch (SocketTimeoutException ste) {
 						System.out.println ("Timeout Occurred");
 					}
