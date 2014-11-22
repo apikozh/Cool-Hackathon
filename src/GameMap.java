@@ -4,8 +4,8 @@
 public class GameMap {
     private MapObject gameMap[][];
 
-    public GameMap(int length, int width) {
-        gameMap = new MapObject[width][length];
+    public GameMap(int height, int width) {
+        gameMap = new MapObject[height][width];
     }
 
     public int getWidth() {

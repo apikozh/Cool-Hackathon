@@ -15,9 +15,16 @@ class Game {
 		return bonuses;
 	}
 
-	/*Map getMap() {
+	Map getMap() {
 		return map;
-	}*/
+	}
 
+    public static void main(String args[]) {
+        //instance of map
+        //instances of wall
+        //put in different places
+        //bonuses randomly on map
+        //add method addUnit(Unit), which adds unit on random place
+    }
 	
 }
