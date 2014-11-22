@@ -4,8 +4,6 @@
 public class Unit extends DynamicObject {
     private String name;
 
-    private int angle;
-
     private Weapon weapon;
 
     private int team;
@@ -16,10 +14,6 @@ public class Unit extends DynamicObject {
 
     public String getName() {
         return name;
-    }
-
-    public int getAngle() {
-        return angle;
     }
 
     public Weapon getWeapon() {
@@ -36,10 +30,6 @@ public class Unit extends DynamicObject {
 	
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setAngle(int angle) {
-        this.angle = angle;
     }
 
     public void setWeapon(Weapon weapon) {

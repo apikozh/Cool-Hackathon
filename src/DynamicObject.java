@@ -6,6 +6,16 @@ public class DynamicObject extends BasicLifeClass {
 
     private int positionY;
 
+    private int angle;
+
+    public int getAngle() {
+        return angle;
+    }
+
+    public void setAngle(int angle) {
+        this.angle = angle;
+    }
+
     public int getPositionX() {
         return positionX;
     }
