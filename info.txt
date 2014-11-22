@@ -1,0 +1,96 @@
+
+//JSON
+Plain text
+
+# LISTs format:
+<listName> <number of elements>
+<element 1>
+<element 2>
+...
+# Element structure depends on list type
+
+### Server 
+
+0. On connection. Sends to the client:
+ - magic sentence "Welcome to Cool Hackathon!"
+ - map size in format:
+	- "map"
+	- <width> (int)
+	- <height> (int)
+ - available weapons as LIST (optional):
+	- <listName> := "weapons"
+	- element format: <id> <name> <recharge time> 
+ - available teams (optional):
+	- "teams" <teams number>
+// player types (optional)
+
+1. On control keyword from client (player NOT in the game):
+ - "name" - set/change player name. Params:
+	- <player name> (string) [-a-zA-Z0-9_](3,30)
+ - "team" - set/change team id. Params:
+	- <team id> (int)
+ - "ptype" - set/change player type. Params:
+	- <player type> (int)
+ ...
+ - "play" - add player to the game
+ 
+2. On control keyword from client (player in the game):
+ - "up" - go up
+ - "left" - go left
+ - "right" - go right
+ - "down" - go down
+ - "rotleft" - rotate left
+ - "rotright" - rotate right
+ - "shot" - use weapon
+ - "weapon" - change weapon. Params:
+	- <weapon id> (int)
+ ...
+ - "end" - remove player from the game
+
+3. On every iteration. Sends to the client:
+ - "begin_map_data"
+
+ - <listName> <number of elements>
+	- element 1
+	- element 2
+	...
+	
+ - <listName> <number of elements>
+	- element 1
+	- element 2
+	...
+ ...
+ 
+ - "end_map_data"
+
+# <listName> can be as follows:
+ - "players" - list of players. Element structure:
+	- posX (int/real)
+	- posY (int/real)
+	- angle (int/real)
+	- heals (int) [0..100]
+	- weapon (int)??
+	- name (string)
+	- team (int)
+	- type (int)
+1. List of walls/obstacles (posX int/real, posY int/real, heals int, type int)
+3. Shells/bullets ()
+
+### Client 
+0. Connection. Sends to the server:
+ - magic sentence "I wanna play!"
+
+1. Authentication:
+ - "name" <player name> (string) [-a-zA-Z0-9_](3,30)
+ - "key" <player key> (int) [0-9](4-9)
+
+2. Game settings (optional):
+ - "team" <team> (int) // name
+ - "ptype" <player type> (int)
+ 
+3. Select mode of interaction:
+ - "play"
+ - "view"
+ 
+4. Play/view loop
+
