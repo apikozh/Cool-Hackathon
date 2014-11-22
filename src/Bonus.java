@@ -1,5 +1,5 @@
 /**
  * Created by Victor Dichko on 22.11.14.
  */
-public class Bonus extends StaticObjects {
+public class Bonus extends StaticObject {
 }

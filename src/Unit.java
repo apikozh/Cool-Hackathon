@@ -1,7 +1,7 @@
 /**
  * Created by Victor Dichko on 22.11.14.
  */
-public class Unit extends DynamicObjects {
+public class Unit extends DynamicObject {
     private String name;
 
     private int angle;

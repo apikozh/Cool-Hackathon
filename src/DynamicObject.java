@@ -1,7 +1,7 @@
 /**
  * Created by Victor Dichko on 22.11.14.
  */
-public class StaticObjects extends BasicLifeClass {
+public class DynamicObject extends BasicLifeClass {
     private int positionX;
 
     private int positionY;
