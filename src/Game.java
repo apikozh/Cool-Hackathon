@@ -4,7 +4,7 @@ import java.util.*;
 class Game {
 	ArrayList<Unit> units;
 	ArrayList<Bonus> bonuses;
-	//GameMap map;
+	GameMap map;
 	ArrayList<Bullet> bullets;
 		
 	ArrayList<Unit> getUnits() {
@@ -15,7 +15,7 @@ class Game {
 		return bonuses;
 	}
 
-	Map getMap() {
+	GameMap getMap() {
 		return map;
 	}
 
