@@ -53,9 +53,9 @@ public class ClientSocket extends Thread {
 				Scanner cmdScanner = new Scanner(line);
 				if (!cmdScanner.hasNext())
 					continue;
-				String str = cmdScanner.next();
+				String cmd = cmdScanner.next();
 							System.out.print(str);
-				switch (str) {
+				switch (cmd) {
 					case "name": 
 						System.out.print("Set name: ");
 						if (!cmdScanner.hasNext())
@@ -87,10 +87,60 @@ public class ClientSocket extends Thread {
 						System.out.println("play");
 						Game.addUnit(unit);
 						break;
+
+					case "up": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setMovement(UnitAction.MOVE_UP);
+						unit.setNextAction(nextAction);
+						break;
+					case "down": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setMovement(UnitAction.MOVE_DOWN);
+						unit.setNextAction(nextAction);
+						break;
+					case "left": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setMovement(UnitAction.MOVE_LEFT);
+						unit.setNextAction(nextAction);
+						break;
+					case "right": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setMovement(UnitAction.MOVE_RIGHT);
+						unit.setNextAction(nextAction);
+						break;
+					case "rotleft": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setRotation(UnitAction.ROT_LEFT);
+						unit.setNextAction(nextAction);
+						break;
+					case "rotright": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setRotation(UnitAction.ROT_RIGHT);
+						unit.setNextAction(nextAction);
+						break;
+					case "shot": 
+						System.out.println(cmd);
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setShotting(true);
+						unit.setNextAction(nextAction);
+						break;
+					case "weapon": 
+						System.out.println(cmd);
+						if (!cmdScanner.hasNextInt())
+							continue;
+						int weapon = cmdScanner.nextInt();
+						UnitAction nextAction = unit.getNextAction();
+						nextAction.setWeapon(weapon);
+						unit.setNextAction(nextAction);
+						break;
 					default: ;
 				}
-				
-				
 
 			}
 		} catch (IOException e) { 
@@ -99,4 +149,4 @@ public class ClientSocket extends Thread {
 		} 
 	}
 
-}
+}	
