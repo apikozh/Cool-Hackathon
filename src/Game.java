@@ -23,10 +23,6 @@ class Game {
         return teams;
     }
 
-//    public static GameMap getGameMap(int height, int width) {
-//		return new GameMap(height, width);
-//	}
-
     public static GameMap getMap() {
         return map;
     }
@@ -46,30 +42,33 @@ class Game {
         }
     }
 
-    private static void addRandomBonuses(int quantity, GameMap gameMap) {
+    private static void addRandomBonuses(int quantity) {
         int elementPositionY, elementPositionX;
+        int numberOfElements = 0;
         Random random = new Random();
-        for (int i = 0; i < quantity; i++) {
+        while (numberOfElements != quantity) {
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
-            if (gameMap.getElement(elementPositionX, elementPositionY) == null) {
+            if (map.getElement(elementPositionX, elementPositionY) == null) {
                 Bonus bonus = new Bonus();
                 bonus.setPosition(elementPositionX, elementPositionY);
                 bonuses.add(bonus);
+                numberOfElements++;
             }
         }
     }
 
-    private static void addRandomWalls(int quantity, GameMap gameMap) {
+    private static void addRandomWalls(int quantity) {
         Random random = new Random();
-        int elementPositionX;
-        int elementPositionY;
-        for (int i = 0; i < quantity; i++) {
+        int elementPositionX, elementPositionY;
+        int numberOfElements = 0;
+        while (numberOfElements != quantity) {
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
-            if (gameMap.getElement(elementPositionX, elementPositionY) == null) {
+            if (map.getElement(elementPositionX, elementPositionY) == null) {
                 Wall wall = new Wall();
-                gameMap.setElement(elementPositionX, elementPositionY, wall);
+                map.setElement(elementPositionX, elementPositionY, wall);
+                numberOfElements++;
             }
         }
 
@@ -81,8 +80,8 @@ class Game {
         // Create GameMap
         map = new GameMap(GAME_MAP_HEIGHT, GAME_MAP_WIDTH);
 
-        addRandomWalls(100, map);
-        addRandomBonuses(10, map);
+        addRandomWalls(100);
+        addRandomBonuses(10);
 
     }
 	
