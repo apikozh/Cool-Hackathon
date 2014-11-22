@@ -8,7 +8,9 @@ public class Unit extends DynamicObject {
 
     private Weapon weapon;
 
-    private ClientSocket clientSocket;
+    private int team;
+	
+	private ClientSocket clientSocket;
 
     public String getName() {
         return name;
@@ -22,6 +24,10 @@ public class Unit extends DynamicObject {
         return weapon;
     }
 
+    public int getTeam() {
+        return team;
+    }
+	
     public void setName(String name) {
         this.name = name;
     }
@@ -32,6 +38,10 @@ public class Unit extends DynamicObject {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public void setTeam(int team) {
+        this.team = team;
     }
 
     public ClientSocket getClientSocket() {
