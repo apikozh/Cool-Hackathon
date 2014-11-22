@@ -27,7 +27,7 @@ class Game {
         return map;
     }
 
-    private static void addRandomUnit(Unit unit) {
+    public static void addUnit(Unit unit) {
         int elementPositionY, elementPositionX;
         Random random = new Random();
         boolean unitAdded = false;
