@@ -349,7 +349,7 @@ class Game {
         weapon.setReloadTime(10);
 
         Weapon weapon2 = new Weapon();
-        weapon2.setName("Super Gun!");
+        weapon2.setName("Super_Gun!");
         weapon2.setBulletsNumber(-1);
         weapon2.setBulletType(bulletType);
         weapon2.setReloadTime(1);
@@ -362,9 +362,9 @@ class Game {
 
         // Add teams
         Team team1 = new Team();
-        team1.setName("Team 1");
+        team1.setName("Team1");
         Team team2 = new Team();
-        team2.setName("Team 2");
+        team2.setName("Team2");
         teams.add(team1);
         teams.add(team2);
 
@@ -380,7 +380,7 @@ class Game {
 			}
 			// Sleep for X ms
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

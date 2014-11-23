@@ -71,7 +71,7 @@ public class PortListener extends Thread {
 			mapInfo.append(" ");
 			mapInfo.append(obj.getAngle());
 			mapInfo.append(" ");
-			mapInfo.append(obj.getType()); // BAD!!!
+			mapInfo.append(0/*obj.getType()*/); // BAD!!!
 			mapInfo.append("\n");
 		}
 
