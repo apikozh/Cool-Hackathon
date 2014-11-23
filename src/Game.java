@@ -11,7 +11,8 @@ class Game {
     private static ArrayList<MapObject> mapObjects = new ArrayList<>();
     private static ArrayList<Team> teams = new ArrayList<>();
     private static ArrayList<BulletType> bulletTypes = new ArrayList<>();
-
+	private static ArrayList<Weapon> weapons = new ArrayList<>();
+	
 	public static ArrayList<Unit> getUnits() {
 		return units;
 	}
@@ -38,7 +39,7 @@ class Game {
     }
 
     public static void addUnit(Unit unit) {
-        int elementPositionY, elementPositionX;
+		int elementPositionY, elementPositionX;
         Random random = new Random();
         boolean unitAdded = false;
         while (!unitAdded) {
@@ -47,6 +48,8 @@ class Game {
             if (map.getElement(elementPositionX, elementPositionY) == null) {
                 int unitTeam = unit.getTeam();
                 synchronized (units) {
+					unit.getWeapons().addAll(weapons);
+					unit.setWeapon(unit.getWeapons().size() > 0 ? 0 : -1);
 					if (unitTeam != -1) {
 						Team team = teams.get(unit.getTeam());
 						team.addUnit(unit);
@@ -324,7 +327,8 @@ class Game {
         weapon.setBulletsNumber(-1);
         weapon.setBulletType(bulletType);
         weapon.setReloadTime(10);
-        //TODO: use ReloadTime
+        weapons.add(weapon);
+		//TODO: use ReloadTime
 
         addRandomWalls(100);
         addRandomBonuses(10);
