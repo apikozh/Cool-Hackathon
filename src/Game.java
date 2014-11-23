@@ -150,10 +150,7 @@ class Game {
 		Bullet bullet = null;
 		for(int index = bullets.size() - 1; index>=0; index--) {
 			bullet = bullets.get(index);
-			if (bullet.getLeftDelay() > 0) {
-				bullet.setLeftDelay(bullet.getLeftDelay() - 1);
-			}else{
-				bullet.fly();
+			if (bullet.fly()) {
 				int posX = bullet.getPositionX();
 				int posY = bullet.getPositionY();
 				
@@ -161,6 +158,7 @@ class Game {
 					posY < 0 && posY >= map.getHeight())
 				{
 					bullets.remove(index);
+					continue;
 				}
 				
 				boolean collide = false;
@@ -259,7 +257,8 @@ class Game {
 
         for (Unit unit : units) {
             UnitAction unitAction = unit.getNextAction();
-
+			unit.setNextAction(new UnitAction());
+			
             //Handling moves
 			if (unit.getLeftDelayForMovement() == 0) {
 				unit.setLeftDelayForMovement(10);
@@ -299,14 +298,17 @@ class Game {
             unit.setAngle((unit.getAngle() + unitAction.getRotation() + 4) % 4);
 
             //Handling weapon change
-            Weapon weapon = unit.getWeapons().get(unit.getWeapon());
-            int leftDelayForShot = weapon.getLeftDelayForShot();
-            if (leftDelayForShot > 0) {
-                weapon.setLeftDelayForShot(leftDelayForShot - 1);
-            }
+			Weapon weapon = null;
+			if (unit.getWeapon() != -1) {
+				weapon = unit.getWeapons().get(unit.getWeapon());
+				int leftDelayForShot = weapon.getLeftDelayForShot();
+				if (leftDelayForShot > 0) {
+					weapon.setLeftDelayForShot(leftDelayForShot - 1);
+				}
+			}
             if (unitAction.getWeapon() == -1) {
                 if (unitAction.isShooting()) {
-                    if (weapon.getLeftDelayForShot() == 0)
+                    if (weapon != null && weapon.getLeftDelayForShot() == 0)
                         doShot(unit);
                 }
             } else {

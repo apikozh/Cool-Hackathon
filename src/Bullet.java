@@ -33,22 +33,29 @@ public class Bullet extends DynamicObject {
         this.owner = owner;
     }
 
-    public void fly() {
-        int currentPositionX = this.getPositionX();
-        int currentPositionY = this.getPositionY();
-        switch (getAngle()) {
-            case ANGLE_DOWN:
-                    this.setPositionY(currentPositionY + 1);
-                break;
-            case ANGLE_LEFT:
-                    this.setPositionX(currentPositionX - 1);
-                break;
-            case ANGLE_RIGHT:
-                    this.setPositionX(currentPositionX + 1);
-                break;
-            case ANGLE_UP:
-                    this.setPositionY(currentPositionY - 1);
-                break;
-        }
+    public boolean fly() {
+		if (leftDelay > 0) {
+			leftDelay--;
+			return false;
+		}else{
+			leftDelay = type.getDelay();
+			int currentPositionX = this.getPositionX();
+			int currentPositionY = this.getPositionY();
+			switch (getAngle()) {
+				case ANGLE_DOWN:
+						this.setPositionY(currentPositionY + 1);
+					break;
+				case ANGLE_LEFT:
+						this.setPositionX(currentPositionX - 1);
+					break;
+				case ANGLE_RIGHT:
+						this.setPositionX(currentPositionX + 1);
+					break;
+				case ANGLE_UP:
+						this.setPositionY(currentPositionY - 1);
+					break;
+			}
+			return true;
+		}
     }
 }

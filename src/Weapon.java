@@ -49,8 +49,9 @@ public class Weapon {
     }
 
     public Bullet shot() {
-        if (this.bulletsNumber > 0 && leftDelayForShot == 0) {
-			bulletsNumber--;
+        if ((this.bulletsNumber > 0 || this.bulletsNumber == -1) && leftDelayForShot == 0) {
+			if (this.bulletsNumber != -1)
+				bulletsNumber--;
 			leftDelayForShot = reloadTime;
 			Bullet bullet = new Bullet();
 			bullet.setType(this.bulletType);
