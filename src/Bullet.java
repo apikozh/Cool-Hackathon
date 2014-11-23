@@ -22,4 +22,23 @@ public class Bullet extends DynamicObject {
     public void setLeftDelay(int leftDelay) {
         this.leftDelay = leftDelay;
     }
+
+    public void fly(int angle, GameMap map) {
+        int currentPositionX = this.getPositionX();
+        int currentPositionY = this.getPositionY();
+        switch (angle) {
+            case ANGLE_DOWN:
+                    this.setPositionY(currentPositionY + 1);
+                break;
+            case ANGLE_LEFT:
+                    this.setPositionX(currentPositionX - 1);
+                break;
+            case ANGLE_RIGHT:
+                    this.setPositionX(currentPositionX + 1);
+                break;
+            case ANGLE_UP:
+                    this.setPositionY(currentPositionY - 1);
+                break;
+        }
+    }
 }
