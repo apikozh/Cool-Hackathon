@@ -40,11 +40,17 @@ public class ClientSocket extends Thread {
 			if (unit.getWeapon() == -1)
 				info.append(0);
 			else
-				info.append(unit.getWeapons().get(unit.getWeapon()).);
+				info.append(unit.getWeapons().get(unit.getWeapon()).getLeftDelayForShot());
 			info.append("\n");
-			// reload delay
-			// Weapons
-			
+			info.append("weapons ");
+			info.append(unit.getWeapons().size());
+			info.append("\n");
+			for (Weapon w : unit.getWeapons()) {
+				info.append(w.getName());
+				info.append(" ");
+				info.append(w.getBulletsNumber());
+				info.append("\n");
+			}			
 			
 			info.append("end_player_data\n");
 
