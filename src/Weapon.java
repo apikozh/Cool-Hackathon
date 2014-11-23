@@ -5,6 +5,7 @@ public class Weapon {
     private int reloadTime;
     private BulletType bulletType;
     private int bulletsNumber;
+    private int leftDelayForShot;
 
     public int getReloadTime() {
         return reloadTime;
@@ -32,11 +33,17 @@ public class Weapon {
 
     public Bullet shot() {
         if (this.bulletsNumber > 0 ) {
-            bulletsNumber--;
-            Bullet bullet = new Bullet();
-            bullet.setType(this.bulletType);
-            bullet.setHealth(-1);
-            return bullet;
+            if (leftDelayForShot == 0) {
+                bulletsNumber--;
+                Bullet bullet = new Bullet();
+                bullet.setType(this.bulletType);
+                bullet.setHealth(-1);
+                leftDelayForShot = reloadTime;
+                return bullet;
+            } else {
+                leftDelayForShot--;
+                return null;
+            }
         } else {
             return null;
         }

@@ -48,4 +48,8 @@ public class UnitAction {
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
+
+    public UnitAction() {
+        this.weapon = -1;
+    }
 }

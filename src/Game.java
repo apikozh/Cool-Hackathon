@@ -285,9 +285,14 @@ class Game {
                 //TODO: do something to check if it is possible to change weapon
                 //unit.setWeapon(unitAction.getWeapon());
 
-            if (unitAction.isShooting()) {
-                doShot(unit);
+            if (unitAction.getWeapon() == -1) {
+                if (unitAction.isShooting()) {
+                    doShot(unit);
+                }
+            } else {
+                unit.setWeapon(unitAction.getWeapon());
             }
+
         }
     }
 
