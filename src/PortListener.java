@@ -57,6 +57,8 @@ public class PortListener extends Thread {
 			mapInfo.append(obj.getName());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getTeam());
+			mapInfo.append(" ");
+			mapInfo.append(obj.getScore());
 			mapInfo.append("\n");
 		}
 

@@ -200,29 +200,32 @@ class Game {
 	}
 
     private static void handleUnitActions(Unit unit, int newPosX, int newPosY) {
-        if (map.getElement(newPosX, newPosY) == null) { //No collision with wall
-            int bonusIndex = findBonusAt(newPosX, newPosY);
-            if (bonusIndex != -1) {
-                Bonus bonus = bonuses.get(bonusIndex);
-                bonus.apply(unit);
-				bonuses.remove(bonus);
-            }
-            boolean dead = false;
-			int bulletIndex = findBulletAt(newPosX, newPosY);
-            if (bulletIndex != -1) {
-                Bullet bullet = bullets.get(bulletIndex);
-				unit.decreaseHealth(bullet.getType().getDamage());
-				if (unit.getHealth() == 0) {
-					dead = true;
+        try {
+			if (map.getElement(newPosX, newPosY) == null) { //No collision with wall
+				int bonusIndex = findBonusAt(newPosX, newPosY);
+				if (bonusIndex != -1) {
+					Bonus bonus = bonuses.get(bonusIndex);
+					bonus.apply(unit);
+					bonuses.remove(bonus);
 				}
-				bullets.remove(bulletIndex);
-            }
+				boolean dead = false;
+				int bulletIndex = findBulletAt(newPosX, newPosY);
+				if (bulletIndex != -1) {
+					Bullet bullet = bullets.get(bulletIndex);
+					unit.decreaseHealth(bullet.getType().getDamage());
+					if (unit.getHealth() == 0) {
+						dead = true;
+					}
+					bullets.remove(bulletIndex);
+				}
 
-			if (dead)
-				processDeadUnit(unit);
-			else
-				unit.setPosition(newPosX, newPosY);
-        }
+				if (dead)
+					processDeadUnit(unit);
+				else
+					unit.setPosition(newPosX, newPosY);
+			}
+		}catch(IndexOutOfBoundsException e) {
+		}
     }
 
     public static void doShot(Unit unit) {
