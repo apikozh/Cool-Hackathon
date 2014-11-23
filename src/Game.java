@@ -49,10 +49,19 @@ class Game {
                     Team team = teams.get(unit.getTeam());
                     team.addUnit(unit);
                 }
-                units.add(unit);
+                synchronized (units) {
+                    units.add(unit);
+                }
                 unitAdded = true;
             }
         }
+    }
+
+    public static void removeUnit(Unit unit) {
+        if (unit.getTeam() != -1) {
+            teams.get(unit.getTeam()).removeUnit(unit);
+        }
+        units.remove(unit);
     }
 
     private static void addRandomBonuses(int quantity) {

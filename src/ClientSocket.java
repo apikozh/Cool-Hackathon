@@ -17,6 +17,7 @@ public class ClientSocket extends Thread {
 	public void sendMapInfoToClient(String mapInfo) {
 		if (out != null) {
 			out.print(mapInfo);
+            out.flush();
 		}
 	}
 	
@@ -147,7 +148,12 @@ public class ClientSocket extends Thread {
 						nextAction.setWeapon(weapon);
 						unit.setNextAction(nextAction);
 						break;
-					default: ;
+                    case "end":
+                        System.out.println("end");
+                        Game.removeUnit(unit);
+                        break;
+
+                    default: ;
 				}
 
 			}

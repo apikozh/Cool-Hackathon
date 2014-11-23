@@ -72,6 +72,12 @@ public class Unit extends DynamicObject {
         this.leftDelayForMovement = leftDelayForMovement;
     }
 
+    public Unit() {
+        this.team = -1;
+        this.livesNumber = 1;
+        this.setHealth(100);
+    }
+
     public void go(int angle) {
         int currentPositionX = this.getPositionX();
         int currentPositionY = this.getPositionY();
