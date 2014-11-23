@@ -69,14 +69,12 @@ public class ClientSocket extends Thread {
 		try { 
 			out = new PrintWriter(clientSocket.getOutputStream(), false);
 			out.print("Welcome to Cool Hackathon!\n");
-			out.print("map " + Game.getMap().getWidth() + " " + Game.getMap().getHeight() + "\n");
 			out.flush();
-			
+						
 			BufferedReader in = new BufferedReader(
 				 new InputStreamReader(clientSocket.getInputStream())); 
 
 			String inputLine = in.readLine();
-			
 			System.out.println("CLIENT: " + inputLine);
 			if (!inputLine.equals("I wanna play!")) {
 				out.print("Bad answer!\n");
@@ -85,6 +83,19 @@ public class ClientSocket extends Thread {
 				clientSocket.close();
 				return;
 			}
+
+			out.print("map " + Game.getMap().getWidth() + " " + Game.getMap().getHeight() + "\n");
+			out.print("teams " + Game.getTeams().size() + "\n");
+			for (Team team : Game.getTeams()) {
+				out.print(team.getName() + "\n");
+			}			
+			out.print("weapons " + Game.getWeapons().size() + "\n");
+			for (Weapon weapon : Game.getWeapons()) {
+				out.print(weapon.getName() + " " + weapon.getReloadTime() + "" + weapon.getBulletType() + "\n");
+			}			
+			
+			out.flush();
+			listener.addClient(this);
 			
 			/*while (true) {
 				String inputLine = in.readLine();

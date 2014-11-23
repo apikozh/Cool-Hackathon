@@ -108,7 +108,7 @@ public class PortListener extends Thread {
 					//serverSocket.setSoTimeout(10000);
 					System.out.println("Waiting for Connection");
 					try {
-						clients.add(new ClientSocket(serverSocket.accept(), this)); 
+						new ClientSocket(serverSocket.accept(), this); 
 					} catch (SocketTimeoutException ste) {
 						System.out.println ("Timeout Occurred");
 					}
