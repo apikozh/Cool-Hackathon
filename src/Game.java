@@ -339,8 +339,15 @@ class Game {
         weapon.setBulletsNumber(-1);
         weapon.setBulletType(bulletType);
         weapon.setReloadTime(10);
+
+        Weapon weapon2 = new Weapon();
+        weapon2.setName("Super Gun!");
+        weapon2.setBulletsNumber(-1);
+        weapon2.setBulletType(bulletType);
+        weapon2.setReloadTime(1);
+
         weapons.add(weapon);
-		//TODO: use ReloadTime
+        weapons.add(weapon2);
 
         addRandomWalls(100);
         addRandomBonuses(10);
