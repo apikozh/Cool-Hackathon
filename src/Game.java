@@ -180,19 +180,19 @@ class Game {
 		}
 	}
 
-    private static void handleUnitActions(Unit unit, int newPositionX, int newPositionY) {
-        if (map.getElement(newPositionX, newPositionY) == null) { //No collision with wall
-            int bonusIndex = findBonusAt(newPositionX, newPositionY);
+    private static void handleUnitActions(Unit unit, int newPosX, int newPosY) {
+        if (map.getElement(newPosX, newPosY) == null) { //No collision with wall
+            int bonusIndex = findBonusAt(newPosX, newPosY);
             if (bonusIndex != -1) {
                 Bonus bonus = bonuses.get(bonusIndex);
                 //TODO: Assign bonus to unit
             }
             for (Bullet bullet : bullets) {
-                if (bullet.getPositionX() == newPositionX && bullet.getPositionY() == newPositionY) {
+                if (bullet.getPositionX() == newPosX && bullet.getPositionY() == newPosY) {
                     //TODO: Make unit dead
                 }
             }
-            unit.setPosition(newPositionX, newPositionY);
+            unit.setPosition(newPosX, newPosY);
         }
     }
 
@@ -209,14 +209,14 @@ class Game {
             UnitAction unitAction = unit.getNextAction();
             //Handling moves
 
-            int currentPositionX = unit.getPositionX();
-            int currentPositionY = unit.getPositionY();
-            int newPositionX, newPositionY;
+            int curPosX = unit.getPositionX();
+            int curPosY = unit.getPositionY();
+            int newPosX, newPosY;
             switch (unitAction.getMovement()) {
-                case Unit.ANGLE_DOWN:
-                    newPositionX = currentPositionX;
-                    newPositionY = currentPositionY + 1;
-                    handleUnitActions(unit, newPositionX, newPositionY);
+                case UnitAction.MOVE_DOWN:
+                    newPosX = curPosX;
+                    newPosY = curPosY + 1;
+                    handleUnitActions(unit, newPosX, newPosY);
 //                    if (map.getElement(newPositionX, newPositionY) == null) { //No collision with wall
 //                        int bonusIndex = findBonusAt(newPositionX, newPositionY);
 //                        if (bonusIndex != -1) {
@@ -233,13 +233,13 @@ class Game {
 
                     //Else - collision with wall. Move is impossible
                     break;
-                case Unit.ANGLE_LEFT:
+                case UnitAction.MOVE_LEFT:
                     //setPositionX(currentPositionX - 1);
                     break;
-                case Unit.ANGLE_RIGHT:
+                case UnitAction.MOVE_RIGHT:
                     //setPositionX(currentPositionX + 1);
                     break;
-                case Unit.ANGLE_UP:
+                case UnitAction.MOVE_UP:
                     //setPositionY(currentPositionY - 1);
                     break;
             }
