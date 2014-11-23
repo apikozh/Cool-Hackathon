@@ -92,6 +92,7 @@ class Game {
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
             if (map.getElement(elementPositionX, elementPositionY) == null) {
                 Wall wall = new Wall();
+                wall.setPosition(elementPositionX, elementPositionY);
                 map.setElement(elementPositionX, elementPositionY, wall);
                 mapObjects.add(wall);
 				numberOfElements++;
