@@ -154,8 +154,8 @@ class Game {
 				int posX = bullet.getPositionX();
 				int posY = bullet.getPositionY();
 				
-				if (posX < 0 && posX >= map.getWidth() &&
-					posY < 0 && posY >= map.getHeight())
+				if (posX < 0 || posX >= map.getWidth() ||
+					posY < 0 || posY >= map.getHeight())
 				{
 					bullets.remove(index);
 					continue;
