@@ -51,7 +51,7 @@ public class Weapon {
     public Bullet shot() {
         if (this.bulletsNumber > 0 && leftDelayForShot == 0) {
 			bulletsNumber--;
-			leftDelayForShot == reloadTime;
+			leftDelayForShot = reloadTime;
 			Bullet bullet = new Bullet();
 			bullet.setType(this.bulletType);
 			bullet.setHealth(-1);
