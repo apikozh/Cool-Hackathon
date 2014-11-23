@@ -3,7 +3,7 @@ import java.util.*;
 public class Team {
     private String name;
 
-	ArrayList<Unit> units;
+	ArrayList<Unit> units = new ArrayList<>();
 
     public String getName() {
         return name;

@@ -91,7 +91,7 @@ public class ClientSocket extends Thread {
 			}			
 			out.print("weapons " + Game.getWeapons().size() + "\n");
 			for (Weapon weapon : Game.getWeapons()) {
-				out.print(weapon.getName() + " " + weapon.getReloadTime() + "" + weapon.getBulletType() + "\n");
+				out.print(weapon.getName() + " " + weapon.getReloadTime() + " " + weapon.getBulletType() + "\n");
 			}			
 			
 			out.flush();
