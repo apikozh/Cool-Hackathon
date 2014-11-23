@@ -17,14 +17,14 @@ public class GameMap {
     }
 
     public MapObject getElement(int positionX, int positionY) {
-        if (positionX < 0 || positionX > getWidth() || positionY < 0 || positionY > getHeight()) {
+        if (positionX < 0 || positionX >= getWidth() || positionY < 0 || positionY >= getHeight()) {
             throw new IndexOutOfBoundsException();
         }
         return gameMap[positionY][positionX];
     }
 
     public void setElement(int positionX, int positionY, MapObject mapObject) {
-        if (positionX < 0 || positionX > getWidth() || positionY < 0 || positionY > getHeight()) {
+        if (positionX < 0 || positionX >= getWidth() || positionY < 0 || positionY >= getHeight()) {
             throw new IndexOutOfBoundsException();
         }
         gameMap[positionY][positionX] = mapObject;
