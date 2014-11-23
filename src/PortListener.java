@@ -1,12 +1,12 @@
 import java.net.*; 
 import java.io.*; 
-import java.utils.*; 
+import java.util.*;
 
 public class PortListener extends Thread { 
 	protected int port;
 	private boolean terminated;
 	//private Game game;
-	private ArrayList<ClientSocket> clients;
+	private ArrayList<ClientSocket> clients = new ArrayList<>();
 	
 	public PortListener(int port/*, Game game*/) {
 		this.port = port;
@@ -28,9 +28,9 @@ public class PortListener extends Thread {
 		
 		// Static map objects
 		mapInfo.append("walls ");
-		mapInfo.append(Game.mapObjects.size());
+		mapInfo.append(Game.getMapObjects().size());
 		mapInfo.append("\r\n");
-		for (MapObject obj : Game.mapObjects) {
+		for (MapObject obj : Game.getMapObjects()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());
@@ -41,9 +41,9 @@ public class PortListener extends Thread {
 
 		// Units info
 		mapInfo.append("players ");
-		mapInfo.append(Game.units.size());
+		mapInfo.append(Game.getUnits().size());
 		mapInfo.append("\r\n");
-		for (Unit obj : Game.units) {
+		for (Unit obj : Game.getUnits()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());
@@ -62,9 +62,9 @@ public class PortListener extends Thread {
 
 		// Shells/bullets info
 		mapInfo.append("shells ");
-		mapInfo.append(Game.bullets.size());
+		mapInfo.append(Game.getBullets().size());
 		mapInfo.append("\r\n");
-		for (Bullet obj : Game.bullets) {
+		for (Bullet obj : Game.getBullets()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());
@@ -77,9 +77,9 @@ public class PortListener extends Thread {
 
 		// Bonuses info
 		mapInfo.append("bonuses ");
-		mapInfo.append(Game.bonuses.size());
+		mapInfo.append(Game.getBonuses().size());
 		mapInfo.append("\r\n");
-		for (Bonus obj : Game.bonuses) {
+		for (Bonus obj : Game.getBonuses()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());

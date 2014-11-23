@@ -4,12 +4,12 @@ import java.util.*;
 
 public class ClientSocket extends Thread { 
 	protected Socket clientSocket;
-	private Game game;
+	//private Game game;
 	PrintWriter out = null;
 	
-	public ClientSocket(Socket clientSocket, Game game) {
+	public ClientSocket(Socket clientSocket/*, Game game*/) {
 		this.clientSocket = clientSocket;
-		this.game = game;
+		//this.game = game;
 		
 		start();
 	}
@@ -61,8 +61,9 @@ public class ClientSocket extends Thread {
 				if (!cmdScanner.hasNext())
 					continue;
 				String cmd = cmdScanner.next();
-							System.out.print(str);
-				switch (cmd) {
+                System.out.print(cmd);
+                UnitAction nextAction;
+                switch (cmd) {
 					case "name": 
 						System.out.print("Set name: ");
 						if (!cmdScanner.hasNext())
@@ -97,44 +98,44 @@ public class ClientSocket extends Thread {
 
 					case "up": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setMovement(UnitAction.MOVE_UP);
 						unit.setNextAction(nextAction);
 						break;
 					case "down": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setMovement(UnitAction.MOVE_DOWN);
 						unit.setNextAction(nextAction);
 						break;
 					case "left": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setMovement(UnitAction.MOVE_LEFT);
 						unit.setNextAction(nextAction);
 						break;
 					case "right": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setMovement(UnitAction.MOVE_RIGHT);
 						unit.setNextAction(nextAction);
 						break;
 					case "rotleft": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setRotation(UnitAction.ROT_LEFT);
 						unit.setNextAction(nextAction);
 						break;
 					case "rotright": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setRotation(UnitAction.ROT_RIGHT);
 						unit.setNextAction(nextAction);
 						break;
 					case "shot": 
 						System.out.println(cmd);
-						UnitAction nextAction = unit.getNextAction();
-						nextAction.setShotting(true);
+						nextAction = unit.getNextAction();
+						nextAction.setShooting(true);
 						unit.setNextAction(nextAction);
 						break;
 					case "weapon": 
@@ -142,7 +143,7 @@ public class ClientSocket extends Thread {
 						if (!cmdScanner.hasNextInt())
 							continue;
 						int weapon = cmdScanner.nextInt();
-						UnitAction nextAction = unit.getNextAction();
+						nextAction = unit.getNextAction();
 						nextAction.setWeapon(weapon);
 						unit.setNextAction(nextAction);
 						break;

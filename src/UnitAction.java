@@ -2,6 +2,16 @@
  * Created by Victor Dichko on 23.11.14.
  */
 public class UnitAction {
+    public static final int MOVE_NONE = 0;
+    public static final int MOVE_RIGHT = 1;
+    public static final int MOVE_DOWN = 2;
+    public static final int MOVE_LEFT = 3;
+    public static final int MOVE_UP = 4;
+
+    public static final int ROT_NONE = 0;
+    public static final int ROT_LEFT = -1;
+    public static final int ROT_RIGHT = 1;
+
     private int movement;
     private int rotation;
     private boolean shoot;

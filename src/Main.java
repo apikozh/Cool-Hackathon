@@ -6,7 +6,7 @@ class Main {
 		
 		Game game = new Game();
 		
-		PortListener listener = new PortListener(6123, game);
+		PortListener listener = new PortListener(6123/*, game*/);
 	
 	}
 }

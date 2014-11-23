@@ -23,10 +23,10 @@ public class Bullet extends DynamicObject {
         this.leftDelay = leftDelay;
     }
 
-    public void fly(int angle) {
+    public void fly() {
         int currentPositionX = this.getPositionX();
         int currentPositionY = this.getPositionY();
-        switch (angle) {
+        switch (getAngle()) {
             case ANGLE_DOWN:
                     this.setPositionY(currentPositionY + 1);
                 break;

@@ -4,12 +4,12 @@ import java.util.*;
 class Game {
     private final static int GAME_MAP_WIDTH = 30;
     private final static int GAME_MAP_HEIGHT = 30;
-	private static ArrayList<Unit> units;
-	private static ArrayList<Bonus> bonuses;
+	private static ArrayList<Unit> units = new ArrayList<>();
+	private static ArrayList<Bonus> bonuses = new ArrayList<>();
 	private static GameMap map;
-	private static ArrayList<Bullet> bullets;
-	private static ArrayList<MapObject> mapObjects;
-    private static ArrayList<Team> teams;
+	private static ArrayList<Bullet> bullets = new ArrayList<>();
+    private static ArrayList<MapObject> mapObjects = new ArrayList<>();
+    private static ArrayList<Team> teams = new ArrayList<>();
 
 	public static ArrayList<Unit> getUnits() {
 		return units;
@@ -27,8 +27,15 @@ class Game {
         return map;
     }
 
-	
-	
+
+    public static ArrayList<MapObject> getMapObjects() {
+        return mapObjects;
+    }
+
+    public static ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
     public static void addUnit(Unit unit) {
         int elementPositionY, elementPositionX;
         Random random = new Random();
@@ -37,8 +44,12 @@ class Game {
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
             if (map.getElement(elementPositionX, elementPositionY) == null) {
-                Team team = teams.get(unit.getTeam());
-                team.addUnit(unit);
+                int unitTeam = unit.getTeam();
+                if (unitTeam != -1) {
+                    Team team = teams.get(unit.getTeam());
+                    team.addUnit(unit);
+                }
+                units.add(unit);
                 unitAdded = true;
             }
         }
@@ -122,26 +133,28 @@ class Game {
 				}
 				
 				boolean collide = false;
-				if ((MapObject obj = map.getElement(posX, posY)) != null) {
-					obj.decreaseHealth(bullet.getType().getDemage());
+                MapObject obj;
+				if ((obj = map.getElement(posX, posY)) != null) {
+					obj.decreaseHealth(bullet.getType().getDamage());
 					if (obj.getHealth() == 0) {
 						map.setElement(posX, posY, null);
 						mapObjects.remove(obj);
 					}
 					collide = true;
 				}
-				if ((int bnsId = findBonusAt(posX, posY)) != -1) {
-					Bonus bonus = bouses.get(bnsId);
-					bonus.decreaseHealth(bullet.getType().getDemage());
+                int bnsId;
+				if ((bnsId = findBonusAt(posX, posY)) != -1) {
+					Bonus bonus = bonuses.get(bnsId);
+					bonus.decreaseHealth(bullet.getType().getDamage());
 					if (bonus.getHealth() == 0) {
-						bouses.remove(bnsId);
+						bonuses.remove(bnsId);
 					}
 					collide = true;
 				}
 				for (int unitId=units.size()-1; unitId>=0; unitId--) {
 					Unit unit = units.get(unitId);
 					if (unit.getPositionX() == posX && unit.getPositionY() == posY) {
-						unit.decreaseHealth(bullet.getType().getDemage());
+						unit.decreaseHealth(bullet.getType().getDamage());
 						if (unit.getHealth() == 0) {
 							processDeadUnit(unit);
 						}
@@ -247,9 +260,13 @@ class Game {
 			// Send map data to clients
 			listener.sendMapInfoToClients();
 			// Sleep for X ms
-			Thread.sleep(1000);
-			// Do client ACTIONS
-			doUnitActions();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // Do client ACTIONS
+			//doUnitActions();
 			// Calc new bullets position
 			processBullets();
 		}
