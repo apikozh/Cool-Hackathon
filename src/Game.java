@@ -10,6 +10,7 @@ class Game {
 	private static ArrayList<Bullet> bullets = new ArrayList<>();
     private static ArrayList<MapObject> mapObjects = new ArrayList<>();
     private static ArrayList<Team> teams = new ArrayList<>();
+    private static ArrayList<BulletType> bulletTypes = new ArrayList<>();
 
 	public static ArrayList<Unit> getUnits() {
 		return units;
@@ -196,6 +197,16 @@ class Game {
         }
     }
 
+    public static void doShot(Unit unit) {
+        Bullet bullet = new Bullet();
+        bullet.setPositionX(unit.getPositionX());
+        bullet.setPositionY(unit.getPositionY());
+        bullet.setAngle(unit.getAngle());
+        bullet.setType(bulletTypes.get(0));
+        bullet.setHealth(-1);
+        bullets.add(bullet);
+    }
+
     public static void doUnitActions() {
         //перебрать все юниты,
         //обработать nextActiona
@@ -213,46 +224,42 @@ class Game {
             int curPosY = unit.getPositionY();
             int newPosX, newPosY;
             switch (unitAction.getMovement()) {
+                case UnitAction.MOVE_NONE:
+                    break;
                 case UnitAction.MOVE_DOWN:
                     newPosX = curPosX;
                     newPosY = curPosY + 1;
                     handleUnitActions(unit, newPosX, newPosY);
-//                    if (map.getElement(newPositionX, newPositionY) == null) { //No collision with wall
-//                        int bonusIndex = findBonusAt(newPositionX, newPositionY);
-//                        if (bonusIndex != -1) {
-//                            Bonus bonus = bonuses.get(bonusIndex);
-//                            //TODO: Assign bonus to unit
-//                        }
-//                        for (Bullet bullet : bullets) {
-//                            if (bullet.getPositionX() == newPositionX && bullet.getPositionY() == newPositionY) {
-//                                //TODO: Make unit dead
-//                            }
-//                        }
-//                        unit.setPosition(newPositionX, newPositionY);
-//                    }
-
-                    //Else - collision with wall. Move is impossible
                     break;
                 case UnitAction.MOVE_LEFT:
-                    //setPositionX(currentPositionX - 1);
+                    newPosX = curPosX - 1;
+                    newPosY = curPosY;
+                    handleUnitActions(unit, newPosX, newPosY);
                     break;
                 case UnitAction.MOVE_RIGHT:
-                    //setPositionX(currentPositionX + 1);
+                    newPosX = curPosX + 1;
+                    newPosY = curPosY;
+                    handleUnitActions(unit, newPosX, newPosY);
                     break;
                 case UnitAction.MOVE_UP:
-                    //setPositionY(currentPositionY - 1);
+                    newPosX = curPosX;
+                    newPosY = curPosY - 1;
+                    handleUnitActions(unit, newPosX, newPosY);
                     break;
             }
 
 
             //Handling rotations
-            unit.setAngle(unitAction.getRotation());
+            unit.setAngle((unit.getAngle() + unitAction.getRotation() + 4) % 4);
 
             //Handling weapon change
 
                 //TODO: do something to check if it is possible to change weapon
                 //unit.setWeapon(unitAction.getWeapon());
 
+            if (unitAction.isShooting()) {
+                doShot(unit);
+            }
         }
     }
 
@@ -262,6 +269,13 @@ class Game {
 
         // Create GameMap
         map = new GameMap(GAME_MAP_HEIGHT, GAME_MAP_WIDTH);
+
+        // Add some type of bullets
+        BulletType bulletType = new BulletType();
+        bulletType.setDamage(20);
+        bulletType.setDelay(1);
+        bulletType.setRadius(1);
+        bulletTypes.add(bulletType);
 
         addRandomWalls(100);
         addRandomBonuses(10);
