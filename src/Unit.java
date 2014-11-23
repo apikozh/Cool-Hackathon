@@ -4,6 +4,8 @@
 public class Unit extends DynamicObject {
     private String name;
 
+    private int livesNumber;
+
     private Weapon weapon;
 
     private int team;
@@ -50,5 +52,13 @@ public class Unit extends DynamicObject {
 
     public void setClientSocket(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
+    }
+
+    public int getLivesNumber() {
+        return livesNumber;
+    }
+
+    public void setLivesNumber(int livesNumber) {
+        this.livesNumber = livesNumber;
     }
 }
