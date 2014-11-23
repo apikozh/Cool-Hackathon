@@ -154,8 +154,13 @@ class Game {
 		}
 	}
 
+	public static void sendMapInfoToPlayers() {
+	
+	}
+	
     public static void main(String args[]) {
-        Random random = new Random();
+
+		PortListener listener = new PortListener(6123);
 
         // Create GameMap
         map = new GameMap(GAME_MAP_HEIGHT, GAME_MAP_WIDTH);
@@ -163,12 +168,11 @@ class Game {
         addRandomWalls(100);
         addRandomBonuses(10);
 		
-		
 		// Main loop
 		
 		while (true) {
 			// Send map data to clients
-			sendMapInfoToPlayers();
+			listener.sendMapInfoToClients();
 			// Sleep for X ms
 			Thread.sleep(1000);
 			// Do client ACTIONS

@@ -5,6 +5,7 @@ import java.util.*;
 public class ClientSocket extends Thread { 
 	protected Socket clientSocket;
 	private Game game;
+	PrintWriter out = null;
 	
 	public ClientSocket(Socket clientSocket, Game game) {
 		this.clientSocket = clientSocket;
@@ -13,13 +14,19 @@ public class ClientSocket extends Thread {
 		start();
 	}
 	
+	public void sendMapInfoToClient(String mapInfo) {
+		if (out != null) {
+			out.print(mapInfo);
+		}
+	}
+	
 	public void run() {
 		System.out.println ("New communication thread started");
 
 		Unit unit = new Unit();
 		
 		try { 
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), false);
+			out = new PrintWriter(clientSocket.getOutputStream(), false);
 			out.println("Welcome to Cool Hackathon!");
 			out.flush();
 			out.println("map 30 30");
