@@ -29,20 +29,20 @@ public class PortListener extends Thread {
 		// Static map objects
 		mapInfo.append("walls ");
 		mapInfo.append(Game.getMapObjects().size());
-		mapInfo.append("\r\n");
+		mapInfo.append("\n");
 		for (MapObject obj : Game.getMapObjects()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getHealth());
-			mapInfo.append("\r\n");
+			mapInfo.append("\n");
 		}
 
 		// Units info
 		mapInfo.append("players ");
 		mapInfo.append(Game.getUnits().size());
-		mapInfo.append("\r\n");
+		mapInfo.append("\n");
 		for (Unit obj : Game.getUnits()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
@@ -57,13 +57,13 @@ public class PortListener extends Thread {
 			mapInfo.append(obj.getName());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getTeam());
-			mapInfo.append("\r\n");
+			mapInfo.append("\n");
 		}
 
 		// Shells/bullets info
 		mapInfo.append("shells ");
 		mapInfo.append(Game.getBullets().size());
-		mapInfo.append("\r\n");
+		mapInfo.append("\n");
 		for (Bullet obj : Game.getBullets()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
@@ -72,20 +72,20 @@ public class PortListener extends Thread {
 			mapInfo.append(obj.getAngle());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getType());
-			mapInfo.append("\r\n");
+			mapInfo.append("\n");
 		}
 
 		// Bonuses info
 		mapInfo.append("bonuses ");
 		mapInfo.append(Game.getBonuses().size());
-		mapInfo.append("\r\n");
+		mapInfo.append("\n");
 		for (Bonus obj : Game.getBonuses()) {
 			mapInfo.append(obj.getPositionX());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getPositionY());
 			mapInfo.append(" ");
 			mapInfo.append(obj.getType());
-			mapInfo.append("\r\n");
+			mapInfo.append("\n");
 		}
 		
 		mapInfo.append("end_map_data");
@@ -108,7 +108,7 @@ public class PortListener extends Thread {
 					//serverSocket.setSoTimeout(10000);
 					System.out.println("Waiting for Connection");
 					try {
-						clients.add(new ClientSocket(serverSocket.accept())); 
+						clients.add(new ClientSocket(serverSocket.accept(), this)); 
 					} catch (SocketTimeoutException ste) {
 						System.out.println ("Timeout Occurred");
 					}

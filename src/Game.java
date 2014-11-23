@@ -135,8 +135,12 @@ class Game {
 			unit.setPosition(posX, posY);
 			unit.setHealth(100);
 			unit.setLivesNumber(unit.getLivesNumber() - 1);
-		}else
+		}else{
+			if (unit.getTeam() != -1) {
+				teams.get(unit.getTeam()).removeUnit(unit);
+			}
 			units.remove(unit);
+		}
 	}
 	
 	private static void processBullets() {
@@ -307,6 +311,9 @@ class Game {
 			// Send map data to clients
             synchronized (units) {
 				listener.sendMapInfoToClients();
+				for (Unit unit : units) {
+					unit.getClientSocket().sendPlayerInfoToClient();
+				}
 			}
 			// Sleep for X ms
             try {

@@ -6,32 +6,48 @@ public class ClientSocket extends Thread {
 	protected Socket clientSocket;
 	//private Game game;
 	PrintWriter out = null;
+	Unit unit;
+	PortListener listener;
 	
-	public ClientSocket(Socket clientSocket/*, Game game*/) {
+	public ClientSocket(Socket clientSocket, PortListener listener/*, Game game*/) {
 		this.clientSocket = clientSocket;
 		//this.game = game;
+		this.listener = listener;
 		
 		start();
 	}
 	
 	public void sendMapInfoToClient(String mapInfo) {
 		if (out != null) {
+			// Send map info
 			out.print(mapInfo);
-            out.flush();
+			out.flush();
+		}
+	}
+
+	public void sendPlayerInfoToClient() {
+		if (out != null) {
+			// Generate player info
+			StringBuilder info = new StringBuilder();
+			info.append("begin_player_data");
+			
+			info.append("end_player_data");
+
+			// Send player info
+			out.print(info);
+			out.flush();
 		}
 	}
 	
 	public void run() {
 		System.out.println ("New communication thread started");
 
-		Unit unit = new Unit();
+		unit = new Unit();
 		
 		try { 
 			out = new PrintWriter(clientSocket.getOutputStream(), false);
-			out.println("Welcome to Cool Hackathon!");
-			out.flush();
-			out.println("map 30 30");
-			//out.print("\n");
+			out.print("Welcome to Cool Hackathon!\n");
+			out.print("map " + Game.getMap().getWidth() + " " + Game.getMap().getHeight() + "\n");
 			out.flush();
 			
 			BufferedReader in = new BufferedReader(
@@ -41,7 +57,7 @@ public class ClientSocket extends Thread {
 			
 			System.out.println("CLIENT: " + inputLine);
 			if (!inputLine.equals("I wanna play!")) {
-				out.println("Bad answer!");
+				out.print("Bad answer!\n");
 				System.out.println("Bad answer!");
 				out.flush();
 				clientSocket.close();
@@ -160,7 +176,11 @@ public class ClientSocket extends Thread {
 		} catch (IOException e) { 
 			System.err.println("Problem with Communication Server");
 			//clientSocket.close();
-		} 
+		} finally {
+			if (Game.getUnits().contains(unit))
+				Game.removeUnit(unit);
+			listener.removeClient(this);
+		}
 	}
 
 }	
