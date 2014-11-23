@@ -29,9 +29,24 @@ public class ClientSocket extends Thread {
 		if (out != null) {
 			// Generate player info
 			StringBuilder info = new StringBuilder();
-			info.append("begin_player_data");
+			info.append("begin_player_data\n");
+			info.append("lives ");
+			info.append(unit.getLivesNumber());
+			info.append("\n");
+			info.append("weapon ");
+			info.append(unit.getWeapon());
+			info.append("\n");
+			info.append("reload ");
+			if (unit.getWeapon() == -1)
+				info.append(0);
+			else
+				info.append(unit.getWeapons().get(unit.getWeapon()).);
+			info.append("\n");
+			// reload delay
+			// Weapons
 			
-			info.append("end_player_data");
+			
+			info.append("end_player_data\n");
 
 			// Send player info
 			out.print(info);

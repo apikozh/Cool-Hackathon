@@ -24,7 +24,7 @@ public class PortListener extends Thread {
 	public synchronized void sendMapInfoToClients(/*Game game*/) {
 		// Generate map info for all
 		StringBuilder mapInfo = new StringBuilder();
-		mapInfo.append("begin_map_data");
+		mapInfo.append("begin_map_data\n");
 		
 		// Static map objects
 		mapInfo.append("walls ");
@@ -88,7 +88,7 @@ public class PortListener extends Thread {
 			mapInfo.append("\n");
 		}
 		
-		mapInfo.append("end_map_data");
+		mapInfo.append("end_map_data\n");
 		
 		String rawMapInfo = mapInfo.toString();
 		
