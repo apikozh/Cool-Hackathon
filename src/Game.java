@@ -287,13 +287,15 @@ class Game {
             unit.setAngle((unit.getAngle() + unitAction.getRotation() + 4) % 4);
 
             //Handling weapon change
-
-                //TODO: do something to check if it is possible to change weapon
-                //unit.setWeapon(unitAction.getWeapon());
-
+            Weapon weapon = unit.getWeapons().get(unit.getWeapon());
+            int leftDelayForShot = weapon.getLeftDelayForShot();
+            if (leftDelayForShot > 0) {
+                weapon.setLeftDelayForShot(leftDelayForShot - 1);
+            }
             if (unitAction.getWeapon() == -1) {
                 if (unitAction.isShooting()) {
-                    doShot(unit);
+                    if (weapon.getLeftDelayForShot() == 0)
+                        doShot(unit);
                 }
             } else {
                 unit.setWeapon(unitAction.getWeapon());
@@ -353,7 +355,7 @@ class Game {
             }
             synchronized (units) {
 				// Do client ACTIONS
-				//doUnitActions();
+				doUnitActions();
 				// Calc new bullets position
 				processBullets();
 			}

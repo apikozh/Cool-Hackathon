@@ -50,17 +50,11 @@ public class Weapon {
 
     public Bullet shot() {
         if (this.bulletsNumber > 0 ) {
-            if (leftDelayForShot == 0) {
-                bulletsNumber--;
-                Bullet bullet = new Bullet();
-                bullet.setType(this.bulletType);
-                bullet.setHealth(-1);
-                leftDelayForShot = reloadTime;
-                return bullet;
-            } else {
-                leftDelayForShot--;
-                return null;
-            }
+            bulletsNumber--;
+            Bullet bullet = new Bullet();
+            bullet.setType(this.bulletType);
+            bullet.setHealth(-1);
+            return bullet;
         } else {
             return null;
         }
