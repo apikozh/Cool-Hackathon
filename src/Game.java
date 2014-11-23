@@ -46,6 +46,7 @@ class Game {
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
             if (map.getElement(elementPositionX, elementPositionY) == null) {
+                unit.setPosition(elementPositionX, elementPositionY);
                 int unitTeam = unit.getTeam();
                 synchronized (units) {
 					unit.getWeapons().addAll(weapons);
