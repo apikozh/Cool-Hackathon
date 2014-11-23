@@ -14,6 +14,8 @@ public class Unit extends DynamicObject {
 
     private int leftDelayForMovement;
 
+    private int score;
+
     private ArrayList<Weapon> weapons = new ArrayList<>();
 	
     private UnitAction nextAction = new UnitAction();
@@ -78,6 +80,14 @@ public class Unit extends DynamicObject {
 
     public void setLeftDelayForMovement(int leftDelayForMovement) {
         this.leftDelayForMovement = leftDelayForMovement;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public Unit() {
