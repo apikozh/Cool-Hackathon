@@ -43,6 +43,7 @@ public class ClientSocket extends Thread {
 		System.out.println ("New communication thread started");
 
 		unit = new Unit();
+		unit.setClientSocket(this);
 		
 		try { 
 			out = new PrintWriter(clientSocket.getOutputStream(), false);
