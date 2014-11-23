@@ -51,5 +51,8 @@ public class UnitAction {
 
     public UnitAction() {
         this.weapon = -1;
+		//this.movement = MOVE_NONE;
+		//this.rotation = ROT_NONE;
+		//this.shoot = false;
     }
 }

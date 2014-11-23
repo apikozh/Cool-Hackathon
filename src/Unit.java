@@ -51,7 +51,7 @@ public class Unit extends DynamicObject {
     }
 
     public synchronized void setNextAction(UnitAction nextAction) {
-        this.weapon = weapon;
+        this.nextAction = nextAction;
     }
 	
     public void setTeam(int team) {
