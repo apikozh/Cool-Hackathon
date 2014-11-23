@@ -45,11 +45,11 @@ class Game {
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
             if (map.getElement(elementPositionX, elementPositionY) == null) {
                 int unitTeam = unit.getTeam();
-                if (unitTeam != -1) {
-                    Team team = teams.get(unit.getTeam());
-                    team.addUnit(unit);
-                }
                 synchronized (units) {
+					if (unitTeam != -1) {
+						Team team = teams.get(unit.getTeam());
+						team.addUnit(unit);
+					}
                     units.add(unit);
                 }
                 unitAdded = true;
@@ -58,10 +58,12 @@ class Game {
     }
 
     public static void removeUnit(Unit unit) {
-        if (unit.getTeam() != -1) {
-            teams.get(unit.getTeam()).removeUnit(unit);
-        }
-        units.remove(unit);
+        synchronized (units) {
+			if (unit.getTeam() != -1) {
+				teams.get(unit.getTeam()).removeUnit(unit);
+			}
+			units.remove(unit);
+		}
     }
 
     private static void addRandomBonuses(int quantity) {
@@ -267,17 +269,21 @@ class Game {
 		
 		while (true) {
 			// Send map data to clients
-			listener.sendMapInfoToClients();
+            synchronized (units) {
+				listener.sendMapInfoToClients();
+			}
 			// Sleep for X ms
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // Do client ACTIONS
-			//doUnitActions();
-			// Calc new bullets position
-			processBullets();
+            synchronized (units) {
+				// Do client ACTIONS
+				//doUnitActions();
+				// Calc new bullets position
+				processBullets();
+			}
 		}
 
     }
