@@ -2,10 +2,10 @@
  * Created by Victor Dichko on 22.11.14.
  */
 public class DynamicObject extends BasicLifeClass {
-    public final int ANGLE_RIGHT = 0;
-    public final int ANGLE_DOWN  = 1;
-    public final int ANGLE_LEFT  = 2;
-    public final int ANGLE_UP    = 3;
+    public final static int ANGLE_RIGHT = 0;
+    public final static int ANGLE_DOWN  = 1;
+    public final static int ANGLE_LEFT  = 2;
+    public final static int ANGLE_UP    = 3;
 
     private int positionX;
 

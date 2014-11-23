@@ -56,6 +56,7 @@ class Game {
                 bonus.setPosition(elementPositionX, elementPositionY);
                 bonuses.add(bonus);
                 numberOfElements++;
+                //TODO: There might be bug! :) Several bonuses at one place
             }
         }
     }
@@ -153,6 +154,61 @@ class Game {
 			}
 		}
 	}
+
+    public static void doUnitActions() {
+        //перебрать все юниты,
+        //обработать nextActiona
+        //1.move
+        //walls, bonuses, bullets,
+        //2.rotation
+        //3.change weapon (getWeapon = -1 - the same) or fire
+        //New bullet,
+
+        for (Unit unit : units) {
+            UnitAction unitAction = unit.getNextAction();
+            //Handling moves
+
+            int currentPositionX = unit.getPositionX();
+            int currentPositionY = unit.getPositionY();
+            switch (unitAction.getMovement()) {
+                case Unit.ANGLE_DOWN:
+                    if (map.getElement(currentPositionX, currentPositionY + 1) != null) {
+                        //Collision with wall
+                        //Do nothing, because it is impossible to go through the walls
+                    }
+                    for (Bonus bonus : bonuses) {
+                        if (bonus.getPositionX() == currentPositionX && bonus.getPositionY() == currentPositionY + 1) {
+                            //Capture the bonus
+                        }
+                    }
+                    for (Bullet bullet : bullets) {
+                        if (bullet.getPositionX() == currentPositionX && bullet.getPositionY() == currentPositionY + 1) {
+                            //Shot by bullet
+                        }
+                    }
+                    break;
+                case Unit.ANGLE_LEFT:
+                    //setPositionX(currentPositionX - 1);
+                    break;
+                case Unit.ANGLE_RIGHT:
+                    //setPositionX(currentPositionX + 1);
+                    break;
+                case Unit.ANGLE_UP:
+                    //setPositionY(currentPositionY - 1);
+                    break;
+            }
+
+
+            //Handling rotations
+            unit.setAngle(unitAction.getRotation());
+
+            //Handling weapon change
+
+                //TODO: do something to check if it is possible to change weapon
+                //unit.setWeapon(unitAction.getWeapon());
+
+        }
+    }
 
     public static void main(String args[]) {
         Random random = new Random();
