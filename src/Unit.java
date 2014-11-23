@@ -9,6 +9,8 @@ public class Unit extends DynamicObject {
     private Weapon weapon;
 
     private int team;
+
+    private int leftDelayForMovement;
 	
     private UnitAction nextAction = new UnitAction();
 
@@ -60,5 +62,32 @@ public class Unit extends DynamicObject {
 
     public void setLivesNumber(int livesNumber) {
         this.livesNumber = livesNumber;
+    }
+
+    public int getLeftDelayForMovement() {
+        return leftDelayForMovement;
+    }
+
+    public void setLeftDelayForMovement(int leftDelayForMovement) {
+        this.leftDelayForMovement = leftDelayForMovement;
+    }
+
+    public void go(int angle) {
+        int currentPositionX = this.getPositionX();
+        int currentPositionY = this.getPositionY();
+        switch (angle) {
+            case ANGLE_DOWN:
+                this.setPositionY(currentPositionY + 1);
+                break;
+            case ANGLE_LEFT:
+                this.setPositionX(currentPositionX - 1);
+                break;
+            case ANGLE_RIGHT:
+                this.setPositionX(currentPositionX + 1);
+                break;
+            case ANGLE_UP:
+                this.setPositionY(currentPositionY - 1);
+                break;
+        }
     }
 }
