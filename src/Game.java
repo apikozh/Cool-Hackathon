@@ -258,6 +258,9 @@ class Game {
         for (Unit unit : units) {
             UnitAction unitAction = unit.getNextAction();
 			unit.setNextAction(new UnitAction());
+			System.out.print(unitAction.getIsShooting());
+			System.out.print(unit.getNextAction().getIsShooting());
+			System.out.println();
 			
             //Handling moves
 			if (unit.getLeftDelayForMovement() == 0) {
