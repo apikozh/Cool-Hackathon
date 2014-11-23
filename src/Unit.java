@@ -75,6 +75,7 @@ public class Unit extends DynamicObject {
     public Unit() {
         this.team = -1;
         this.livesNumber = 1;
+		this.setMaxHealth(100);
         this.setHealth(100);
     }
 

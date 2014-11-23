@@ -75,7 +75,7 @@ class Game {
             elementPositionY = random.nextInt(GAME_MAP_HEIGHT);
             elementPositionX = random.nextInt(GAME_MAP_WIDTH);
             if (map.getElement(elementPositionX, elementPositionY) == null) {
-                Bonus bonus = new Bonus();
+                Bonus bonus = new BonusMedikit();
                 bonus.setPosition(elementPositionX, elementPositionY);
                 bonuses.add(bonus);
                 numberOfElements++;
@@ -106,6 +106,17 @@ class Game {
 		for (int index=0; index<bonuses.size(); index++) {
 			if (bonuses.get(index).getPositionX() == posX &&
 				bonuses.get(index).getPositionY() == posY)
+			{
+				return index;
+			}
+		}
+		return -1;
+	}
+
+	private static int findBulletAt(int posX, int posY) {
+		for (int index=0; index<bullets.size(); index++) {
+			if (bullets.get(index).getPositionX() == posX &&
+				bullets.get(index).getPositionY() == posY)
 			{
 				return index;
 			}
@@ -186,14 +197,24 @@ class Game {
             int bonusIndex = findBonusAt(newPosX, newPosY);
             if (bonusIndex != -1) {
                 Bonus bonus = bonuses.get(bonusIndex);
-                //TODO: Assign bonus to unit
+                bonus.apply(unit);
+				bonuses.remove(bonus);
             }
-            for (Bullet bullet : bullets) {
-                if (bullet.getPositionX() == newPosX && bullet.getPositionY() == newPosY) {
-                    //TODO: Make unit dead
-                }
+            boolean dead = false;
+			int bulletIndex = findBulletAt(newPosX, newPosY);
+            if (bulletIndex != -1) {
+                Bullet bullet = bullets.get(bulletIndex);
+				unit.decreaseHealth(bullet.getType().getDamage());
+				if (unit.getHealth() == 0) {
+					dead = true;
+				}
+				bullets.remove(bulletIndex);
             }
-            unit.setPosition(newPosX, newPosY);
+
+			if (dead)
+				processDeadUnit(unit);
+			else
+				unit.setPosition(newPosX, newPosY);
         }
     }
 
