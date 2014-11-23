@@ -7,6 +7,8 @@ public class Bullet extends DynamicObject {
 
     private int leftDelay;
 
+    private Unit owner;
+
     public BulletType getType() {
         return type;
     }
@@ -21,6 +23,14 @@ public class Bullet extends DynamicObject {
 
     public void setLeftDelay(int leftDelay) {
         this.leftDelay = leftDelay;
+    }
+
+    public Unit getUnit() {
+        return owner;
+    }
+
+    public void setOwner(Unit owner) {
+        this.owner = owner;
     }
 
     public void fly() {

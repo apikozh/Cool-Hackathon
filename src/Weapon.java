@@ -20,6 +20,10 @@ public class Weapon {
         return leftDelayForShot;
     }
 
+    public void setLeftDelayForShot(int leftDelayForShot) {
+        this.leftDelayForShot = leftDelayForShot;
+    }
+
     public int getReloadTime() {
         return reloadTime;
     }

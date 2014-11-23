@@ -227,6 +227,7 @@ class Game {
             Weapon weapon = unit.getWeapons().get(unit.getWeapon());
             Bullet bullet = weapon.shot();
             if (bullet != null) {
+                bullet.setOwner(unit);
                 bullet.setPositionX(unit.getPositionX());
                 bullet.setPositionY(unit.getPositionY());
                 bullet.setAngle(unit.getAngle());
@@ -317,6 +318,7 @@ class Game {
 
         // Add some type of weapons
         Weapon weapon = new Weapon();
+        weapon.setName("Gun");
         weapon.setBulletsNumber(-1);
         weapon.setBulletType(bulletType);
         weapon.setReloadTime(10);
