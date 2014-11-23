@@ -6,7 +6,7 @@ public class BonusMedikit extends Bonus {
     	
 	private int healthIncarace;
 
-	public BonusMedikit(int healthIncarace) {
+	public BonusMedikit() {
 		super();
 		this.healthIncarace = 30;
 		this.type = MEDIKIT;
