@@ -223,13 +223,16 @@ class Game {
     }
 
     public static void doShot(Unit unit) {
-        Bullet bullet = new Bullet();
-        bullet.setPositionX(unit.getPositionX());
-        bullet.setPositionY(unit.getPositionY());
-        bullet.setAngle(unit.getAngle());
-        bullet.setType(bulletTypes.get(0));
-        bullet.setHealth(-1);
-        bullets.add(bullet);
+        if (unit.getWeapon() != -1) {
+            Weapon weapon = unit.getWeapons().get(unit.getWeapon());
+            Bullet bullet = weapon.shot();
+            if (bullet != null) {
+                bullet.setPositionX(unit.getPositionX());
+                bullet.setPositionY(unit.getPositionY());
+                bullet.setAngle(unit.getAngle());
+                bullets.add(bullet);
+            }
+        }
     }
 
     public static void doUnitActions() {
@@ -302,9 +305,24 @@ class Game {
         bulletType.setRadius(1);
         bulletTypes.add(bulletType);
 
+        // Add some type of weapons
+        Weapon weapon = new Weapon();
+        weapon.setBulletsNumber(-1);
+        weapon.setBulletType(bulletType);
+        weapon.setReloadTime(10);
+        //TODO: use ReloadTime
+
         addRandomWalls(100);
         addRandomBonuses(10);
-		
+
+        // Add teams
+        Team team1 = new Team();
+        team1.setName("Team 1");
+        Team team2 = new Team();
+        team2.setName("Team 2");
+        teams.add(team1);
+        teams.add(team2);
+
 		// Main loop
 		
 		while (true) {

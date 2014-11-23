@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by Victor Dichko on 22.11.14.
  */
@@ -6,11 +8,13 @@ public class Unit extends DynamicObject {
 
     private int livesNumber;
 
-    private Weapon weapon;
+    private int weapon;
 
     private int team;
 
     private int leftDelayForMovement;
+
+    private ArrayList<Weapon> weapons = new ArrayList<>();
 	
     private UnitAction nextAction = new UnitAction();
 
@@ -20,8 +24,12 @@ public class Unit extends DynamicObject {
         return name;
     }
 
-    public Weapon getWeapon() {
+    public int getWeapon() {
         return weapon;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
     }
 
     public synchronized UnitAction getNextAction() {
@@ -36,7 +44,7 @@ public class Unit extends DynamicObject {
         this.name = name;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(int weapon) {
         this.weapon = weapon;
     }
 
@@ -77,6 +85,7 @@ public class Unit extends DynamicObject {
         this.livesNumber = 1;
 		this.setMaxHealth(100);
         this.setHealth(100);
+        this.weapon = -1;
     }
 
     public void go(int angle) {
