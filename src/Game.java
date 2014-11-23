@@ -185,9 +185,12 @@ class Game {
 				for (int unitId=units.size()-1; unitId>=0; unitId--) {
 					Unit unit = units.get(unitId);
 					if (unit.getPositionX() == posX && unit.getPositionY() == posY) {
+                        int health = unit.getHealth();
 						unit.decreaseHealth(bullet.getType().getDamage());
+                        bullet.getOwner().setScore(bullet.getOwner().getScore() + health - unit.getHealth());
 						if (unit.getHealth() == 0) {
 							processDeadUnit(unit);
+                            bullet.getOwner().setScore(bullet.getOwner().getScore() + 100);
 						}
 						collide = true;
 					}
@@ -210,10 +213,14 @@ class Game {
             boolean dead = false;
 			int bulletIndex = findBulletAt(newPosX, newPosY);
             if (bulletIndex != -1) {
+                int health = unit.getHealth();
                 Bullet bullet = bullets.get(bulletIndex);
 				unit.decreaseHealth(bullet.getType().getDamage());
+                bullet.getOwner().setScore(bullet.getOwner().getScore() + health - unit.getHealth());
+
 				if (unit.getHealth() == 0) {
 					dead = true;
+                    bullet.getOwner().setScore(bullet.getOwner().getScore() + 100);
 				}
 				bullets.remove(bulletIndex);
             }

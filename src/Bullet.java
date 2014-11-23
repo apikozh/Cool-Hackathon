@@ -25,7 +25,7 @@ public class Bullet extends DynamicObject {
         this.leftDelay = leftDelay;
     }
 
-    public Unit getUnit() {
+    public Unit getOwner() {
         return owner;
     }
 
