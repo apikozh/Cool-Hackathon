@@ -155,6 +155,22 @@ class Game {
 		}
 	}
 
+    private static void handleUnitActions(Unit unit, int newPositionX, int newPositionY) {
+        if (map.getElement(newPositionX, newPositionY) == null) { //No collision with wall
+            int bonusIndex = findBonusAt(newPositionX, newPositionY);
+            if (bonusIndex != -1) {
+                Bonus bonus = bonuses.get(bonusIndex);
+                //TODO: Assign bonus to unit
+            }
+            for (Bullet bullet : bullets) {
+                if (bullet.getPositionX() == newPositionX && bullet.getPositionY() == newPositionY) {
+                    //TODO: Make unit dead
+                }
+            }
+            unit.setPosition(newPositionX, newPositionY);
+        }
+    }
+
     public static void doUnitActions() {
         //перебрать все юниты,
         //обработать nextActiona
@@ -170,22 +186,27 @@ class Game {
 
             int currentPositionX = unit.getPositionX();
             int currentPositionY = unit.getPositionY();
+            int newPositionX, newPositionY;
             switch (unitAction.getMovement()) {
                 case Unit.ANGLE_DOWN:
-                    if (map.getElement(currentPositionX, currentPositionY + 1) != null) {
-                        //Collision with wall
-                        //Do nothing, because it is impossible to go through the walls
-                    }
-                    for (Bonus bonus : bonuses) {
-                        if (bonus.getPositionX() == currentPositionX && bonus.getPositionY() == currentPositionY + 1) {
-                            //Capture the bonus
-                        }
-                    }
-                    for (Bullet bullet : bullets) {
-                        if (bullet.getPositionX() == currentPositionX && bullet.getPositionY() == currentPositionY + 1) {
-                            //Shot by bullet
-                        }
-                    }
+                    newPositionX = currentPositionX;
+                    newPositionY = currentPositionY + 1;
+                    handleUnitActions(unit, newPositionX, newPositionY);
+//                    if (map.getElement(newPositionX, newPositionY) == null) { //No collision with wall
+//                        int bonusIndex = findBonusAt(newPositionX, newPositionY);
+//                        if (bonusIndex != -1) {
+//                            Bonus bonus = bonuses.get(bonusIndex);
+//                            //TODO: Assign bonus to unit
+//                        }
+//                        for (Bullet bullet : bullets) {
+//                            if (bullet.getPositionX() == newPositionX && bullet.getPositionY() == newPositionY) {
+//                                //TODO: Make unit dead
+//                            }
+//                        }
+//                        unit.setPosition(newPositionX, newPositionY);
+//                    }
+
+                    //Else - collision with wall. Move is impossible
                     break;
                 case Unit.ANGLE_LEFT:
                     //setPositionX(currentPositionX - 1);
