@@ -38,6 +38,14 @@ class Game {
         return bullets;
     }
 
+    public static ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public static void setWeapons(ArrayList<Weapon> weapons) {
+        Game.weapons = weapons;
+    }
+
     public static void addUnit(Unit unit) {
 		int elementPositionY, elementPositionX;
         Random random = new Random();
