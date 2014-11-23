@@ -246,35 +246,40 @@ class Game {
 
         for (Unit unit : units) {
             UnitAction unitAction = unit.getNextAction();
-            //Handling moves
 
-            int curPosX = unit.getPositionX();
-            int curPosY = unit.getPositionY();
-            int newPosX, newPosY;
-            switch (unitAction.getMovement()) {
-                case UnitAction.MOVE_NONE:
-                    break;
-                case UnitAction.MOVE_DOWN:
-                    newPosX = curPosX;
-                    newPosY = curPosY + 1;
-                    handleUnitActions(unit, newPosX, newPosY);
-                    break;
-                case UnitAction.MOVE_LEFT:
-                    newPosX = curPosX - 1;
-                    newPosY = curPosY;
-                    handleUnitActions(unit, newPosX, newPosY);
-                    break;
-                case UnitAction.MOVE_RIGHT:
-                    newPosX = curPosX + 1;
-                    newPosY = curPosY;
-                    handleUnitActions(unit, newPosX, newPosY);
-                    break;
-                case UnitAction.MOVE_UP:
-                    newPosX = curPosX;
-                    newPosY = curPosY - 1;
-                    handleUnitActions(unit, newPosX, newPosY);
-                    break;
-            }
+            //Handling moves
+			if (unit.getLeftDelayForMovement() == 0) {
+				unit.setLeftDelayForMovement(10);
+				int curPosX = unit.getPositionX();
+				int curPosY = unit.getPositionY();
+				int newPosX, newPosY;
+				switch (unitAction.getMovement()) {
+					case UnitAction.MOVE_NONE:
+						break;
+					case UnitAction.MOVE_DOWN:
+						newPosX = curPosX;
+						newPosY = curPosY + 1;
+						handleUnitActions(unit, newPosX, newPosY);
+						break;
+					case UnitAction.MOVE_LEFT:
+						newPosX = curPosX - 1;
+						newPosY = curPosY;
+						handleUnitActions(unit, newPosX, newPosY);
+						break;
+					case UnitAction.MOVE_RIGHT:
+						newPosX = curPosX + 1;
+						newPosY = curPosY;
+						handleUnitActions(unit, newPosX, newPosY);
+						break;
+					case UnitAction.MOVE_UP:
+						newPosX = curPosX;
+						newPosY = curPosY - 1;
+						handleUnitActions(unit, newPosX, newPosY);
+						break;
+				}
+			} else {
+				unit.setLeftDelayForMovement(unit.getLeftDelayForMovement()-1);
+			}
 
 
             //Handling rotations

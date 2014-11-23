@@ -95,7 +95,7 @@ public class ClientSocket extends Thread {
 						if (!cmdScanner.hasNextInt())
 							continue;
 						int team = cmdScanner.nextInt();
-						if (team < Game.getTeams().size()) {
+						if (team >= -1 && team < Game.getTeams().size()) {
 							//Game.getTeams().get(team).addUnit(unit);
 							unit.setTeam(team);
 						}
@@ -161,9 +161,11 @@ public class ClientSocket extends Thread {
 						if (!cmdScanner.hasNextInt())
 							continue;
 						int weapon = cmdScanner.nextInt();
-						nextAction = unit.getNextAction();
-						nextAction.setWeapon(weapon);
-						unit.setNextAction(nextAction);
+						if (weapon >= 0 && weapon < unit.getWeapons().size()) {
+							nextAction = unit.getNextAction();
+							nextAction.setWeapon(weapon);
+							unit.setNextAction(nextAction);
+						}
 						break;
                     case "end":
                         System.out.println("end");
